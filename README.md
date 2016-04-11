@@ -18,9 +18,10 @@ C++ codes of the syntactic Attention-based Neural Machine Translation (ANMT) mod
 
 ## Usage
    1. Modify the paths of `EIGEN_LOCATION`, `SHARE_LOCATION` and `BOOST_LOCATION`. See `Makefile`. 
-   2. `$ make`
-   3. `$./anmt` (Then, training the AttentionTreeEncDec model starts.)
+   2. `$ bash setup.sh`
+   3. `$./tree2seq` (Then, training the AttentionTreeEncDec model starts.)
    4. Modify `main.cpp` if you want to change the model.
+   (!) Attention: I prepare a small corpus of Tanaka corpus. You need over 100,000 parallel corpus.
 
 ## Citaion
    * [1] Akiko Eriguchi, Kazuma Hashimoto, and Yoshimasa Tsuruoka. 2015. "[Tree-to-Sequence Attentional Neural Machine Translation](http://arxiv.org/abs/1603.06075)". arXiv cs.CL 1603.06075.
