@@ -6,9 +6,9 @@ Our model has an attention mechanism that enables the decoder to generate a tran
 ## Description
 C++ codes of the syntactic Attention-based Neural Machine Translation (ANMT) model.
 
-1. 'AttentionTreeEncDec.xpp':  our ANMT model: "Tree-to-Sequence Attentional Neural Machine Translation"
-2. 'AttentionEncDec.xpp': Baseline ANMT model [3]
-3. '/data/': Tanaka Corpus (EN-JP)
+1. `AttentionTreeEncDec.xpp`: our ANMT model, "Tree-to-Sequence Attentional Neural Machine Translation"
+2. `AttentionEncDec.xpp`: Baseline ANMT model [3]
+3. `/data/`: Tanaka Corpus (EN-JP)
 
 ## Requirement
   * Eigen, a template libary for linear algebra (<http://eigen.tuxfamily.org/index.php?title=Main_Page>)
@@ -17,10 +17,10 @@ C++ codes of the syntactic Attention-based Neural Machine Translation (ANMT) mod
   * Option: Enju, a syntactic parser for English (<http://kmcs.nii.ac.jp/enju/?lang=en>)
 
 ## Usage
-   1. Modify the paths of 'EIGEN_LOCATION', 'SHARE_LOCATION' and 'BOOST_LOCATION'. See 'Makefile'. 
-   2. '$ make'
-   3. '$./anmt' (Then, training the AttentionTreeEncDec model starts.)
-   4. Modify 'main.cpp' if you want to change the model.
+   1. Modify the paths of `EIGEN_LOCATION`, `SHARE_LOCATION` and `BOOST_LOCATION`. See `Makefile`. 
+   2. `$ make`
+   3. `$./anmt` (Then, training the AttentionTreeEncDec model starts.)
+   4. Modify `main.cpp` if you want to change the model.
 
 ## Citaion
    * [1] Akiko Eriguchi, Kazuma Hashimoto, and Yoshimasa Tsuruoka. 2015. "[Tree-to-Sequence Attentional Neural Machine Translation](http://arxiv.org/abs/1603.06075)". arXiv cs.CL 1603.06075.
