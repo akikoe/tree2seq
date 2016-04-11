@@ -6,8 +6,9 @@ Our model has an attention mechanism that enables the decoder to generate a tran
 ## Description
 C++ codes of the syntactic Attention-based Neural Machine Translation (ANMT) model.
 
-1. AttentionTreeEncDec -- our ANMT model: "Tree-to-Sequence Attentional Neural Machine Translation"
-2. AttentionEncDec -- [3]
+1. 'AttentionTreeEncDec.xpp':  our ANMT model: "Tree-to-Sequence Attentional Neural Machine Translation"
+2. 'AttentionEncDec.xpp': Baseline ANMT model [3]
+3. '/data/': Tanaka Corpus (EN-JP)
 
 ## Requirement
   * Eigen, a template libary for linear algebra (<http://eigen.tuxfamily.org/index.php?title=Main_Page>)
@@ -25,3 +26,4 @@ C++ codes of the syntactic Attention-based Neural Machine Translation (ANMT) mod
    * [1] Akiko Eriguchi, Kazuma Hashimoto, and Yoshimasa Tsuruoka. 2015. "[Tree-to-Sequence Attentional Neural Machine Translation](http://arxiv.org/abs/1603.06075)". arXiv cs.CL 1603.06075.
    * [2] [Sutskever et al., 2014](http://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf)
    * [3] [Luong et al., 2015](http://www.aclweb.org/anthology/D15-1166)
+   * [4] [Tanaka Corpus](http://www.edrdg.org/wiki/index.php/Tanaka_Corpus)
