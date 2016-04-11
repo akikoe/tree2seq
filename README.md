@@ -22,6 +22,6 @@ C++ codes of the syntactic Attention-based Neural Machine Translation (ANMT) mod
    4. Modify 'main.cpp' if you want to change the model.
 
 ## Citaion
-[1] Akiko Eriguchi, Kazuma Hashimoto, and Yoshimasa Tsuruoka. 2015. "[Tree-to-Sequence Attentional Neural Machine Translation](http://arxiv.org/abs/1603.06075)". arXiv cs.CL 1603.06075.
-[2] [Sutskever et al., 2014](http://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf)
-[3] [Luong et al., 2015](http://www.aclweb.org/anthology/D15-1166)
+   * [1] Akiko Eriguchi, Kazuma Hashimoto, and Yoshimasa Tsuruoka. 2015. "[Tree-to-Sequence Attentional Neural Machine Translation](http://arxiv.org/abs/1603.06075)". arXiv cs.CL 1603.06075.
+   * [2] [Sutskever et al., 2014](http://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf)
+   * [3] [Luong et al., 2015](http://www.aclweb.org/anthology/D15-1166)
