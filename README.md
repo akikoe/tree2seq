@@ -2,6 +2,7 @@
 We have proposed a novel syntactic ANMT model, "[Tree-to-Sequence Attentional Neural Machine Translation](http://arxiv.org/abs/1603.06075)" [1].
 We extend an original sequence-to-sequence model [2] with the source-side phrase structure. 
 Our model has an attention mechanism that enables the decoder to generate a translated word while softly aligning it with source phrases and words.
+[Here](http://www.logos.t.u-tokyo.ac.jp/~eriguchi/demo/tree2seq/index.php) is an online demo of Tree2Seq.
 
 ## Description
 C++ codes of the syntactic Attention-based Neural Machine Translation (ANMT) model.
