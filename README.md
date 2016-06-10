@@ -30,3 +30,9 @@ C++ codes of the syntactic Attention-based Neural Machine Translation (ANMT) mod
    * [2] I. Sutskever, O. Vinyals, and Q. V. Le. 2014. "[Sequence to Sequence Learning with Neural Networks](http://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf)". In Proceedings of Advances in Neural Information Processing Systems 27 (NIPS2014).
    * [3] T. Luong, H. Pham, and C. D. Manning. 2015. "[Effective Approaches to Attention-based Neural Machine Translation](http://www.aclweb.org/anthology/D15-1166)". In Proceedings of the 2015 Conference on Empirical Methods in Natural Language Processing (EMNLP2015).
    * [4] [Tanaka Corpus](http://www.edrdg.org/wiki/index.php/Tanaka_Corpus)
+
+## Contact
+Thank you for your interests.
+If you have any questions and comments, feel free to contact us.
+   * eriguchi [.at.] logos.t.u-tokyo.ac.jp
+   * hassy [.at.] logos.t.u-tokyo.ac.jp
