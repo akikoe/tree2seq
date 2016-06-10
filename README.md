@@ -26,7 +26,7 @@ C++ codes of the syntactic Attention-based Neural Machine Translation (ANMT) mod
    (!) Attention: I prepare a small corpus of Tanaka corpus. You need over 100,000 parallel corpus.
 
 ## Citation
-   * [1] Akiko Eriguchi, Kazuma Hashimoto, and Yoshimasa Tsuruoka. 2015. "[Tree-to-Sequence Attentional Neural Machine Translation](http://arxiv.org/abs/1603.06075)". arXiv cs.CL 1603.06075.
-   * [2] [Sutskever et al., 2014](http://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf)
-   * [3] [Luong et al., 2015](http://www.aclweb.org/anthology/D15-1166)
+   * [1] Akiko Eriguchi, Kazuma Hashimoto, and Yoshimasa Tsuruoka. 2015. "[Tree-to-Sequence Attentional Neural Machine Translation](http://www.logos.t.u-tokyo.ac.jp/~eriguchi/paper/ACL2016/ACL2016.pdf)". In Proceedings of the 54th Annual Meeting of the Association for Computational Linguistics (ACL 2016).
+   * [2] I. Sutskever, O. Vinyals, and Q. V. Le. 2014. "[Sequence to Sequence Learning with Neural Networks](http://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf)". In Proceedings of Advances in Neural Information Processing Systems 27 (NIPS2014).
+   * [3] T. Luong, H. Pham, and C. D. Manning. 2015. "[Effective Approaches to Attention-based Neural Machine Translation](http://www.aclweb.org/anthology/D15-1166)". In Proceedings of the 2015 Conference on Empirical Methods in Natural Language Processing (EMNLP2015).
    * [4] [Tanaka Corpus](http://www.edrdg.org/wiki/index.php/Tanaka_Corpus)
