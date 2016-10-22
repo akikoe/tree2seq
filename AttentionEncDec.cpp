@@ -592,9 +592,9 @@ void AttentionEncDec::train(AttentionEncDec::Data* data, AttentionEncDec::Grad& 
 void AttentionEncDec::train(AttentionEncDec::Data* data, AttentionEncDec::Grad& grad, Real& loss, 
 			    AttentionEncDec::State* state, 
 			    std::vector<BlackOut::State*>& blackOutState,
-			    std::vector<VecD>& s_tilde, std::vector<VecD>& del_stilde) {
+			    std::vector<VecD>& s_tilde, std::vector<VecD>& del_stilde, 
+			    std::vector<VecD>& contextSeqList) {
   VecD targetDist;
-  VecD contextSeq; // C_Seq = Σ (alpha * hidden state)
   std::vector<VecD> alphaSeq;
   std::vector<VecD> showAlphaSeq;
 
@@ -619,16 +619,16 @@ void AttentionEncDec::train(AttentionEncDec::Data* data, AttentionEncDec::Grad& 
     /* Attention */
     s_tilde[i] = this->Wst*state->decState[i]->h + this->bs;
     // sequence
-    contextSeq = this->zeros;
+    contextSeqList[i] = this->zeros;
     alphaSeq.push_back(VecD(state->encState.size()-1)); // Vector for attentional weight
     showAlphaSeq.push_back(MatD::Zero(data->tgt.size(), 
 				      state->encState.size()-1));
     this->calculateAlpha(state, state->decState[i], alphaSeq[i]);
 
     for (int j = 1; j < (int)state->encState.size(); ++j) {
-      contextSeq += alphaSeq[i].coeff(j-1, 0)*state->encState[j]->h;
+      contextSeqList[i] += alphaSeq[i].coeff(j-1, 0)*state->encState[j]->h;
     }
-    s_tilde[i] += this->Wcs*contextSeq;
+    s_tilde[i] += this->Wcs*contextSeqList[i];
     ActFunc::tanh(s_tilde[i]); // s~tanh(W_c[ht; c_Seq])
 
     if (!this->useBlackOut) {
@@ -659,7 +659,7 @@ void AttentionEncDec::train(AttentionEncDec::Data* data, AttentionEncDec::Grad& 
     state->decState[i]->delh += this->Wst.transpose()*del_stilde[i];
     grad.Wst += del_stilde[i]*state->decState[i]->h.transpose();
     grad.bs += del_stilde[i];
-    grad.Wcs += del_stilde[i]*contextSeq.transpose();
+    grad.Wcs += del_stilde[i]*contextSeqList[i].transpose();
     del_contextSeq = this->Wcs.transpose()*del_stilde[i];
     // del_contextSeq
     for (int j = 0; j < (int)data->src.size(); ++j) { // Seq
@@ -799,7 +799,7 @@ void AttentionEncDec::trainOpenMP() { // Multi-threading
       int id = omp_get_thread_num();
       Real loss;
       if(this->inputFeeding) {
-	this->train(this->trainData[i], args[id]->grad, loss, stateList[i], args[id]->blackOutState, args[id]->s_tilde, args[id]->del_stilde);
+	this->train(this->trainData[i], args[id]->grad, loss, stateList[i], args[id]->blackOutState, args[id]->s_tilde, args[id]->del_stilde, args[id]->contextSeqList);
       } else {
 	this->train(this->trainData[i], args[id]->grad, loss, stateList[i], args[id]->blackOutState);
       }

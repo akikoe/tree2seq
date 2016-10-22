@@ -734,10 +734,10 @@ void AttentionTreeEncDec::train(AttentionTreeEncDec::Data* data, AttentionTreeEn
 void AttentionTreeEncDec::train(AttentionTreeEncDec::Data* data, AttentionTreeEncDec::Grad& grad, Real& loss, 
 				AttentionTreeEncDec::State* state, 
 				std::vector<BlackOut::State*>& blackOutState,
-				std::vector<VecD>& s_tilde, std::vector<VecD>& del_stilde) {
+				std::vector<VecD>& s_tilde, std::vector<VecD>& del_stilde,
+				std::vector<VecD>& contextTreeList) {
   VecD targetDist;
   VecD c0, s0; // cell memory and hidden state for initial Decorder (initDec == CONCAT)
-  VecD contextTree; // C_Tree = Σ (alpha * hidden state)
   const int alphaSize = state->encState.size()-1+state->encTreeNodeVec.size();
   MatD alphaTree = MatD(alphaSize, data->tgt.size());
   // std::vector<VecD> showAlphaTree;
@@ -776,19 +776,19 @@ void AttentionTreeEncDec::train(AttentionTreeEncDec::Data* data, AttentionTreeEn
     s_tilde[i] = this->bs;
     s_tilde[i].noalias() += this->Wst*state->decState[i]->h;
     // sequence and Tree (phrase node)
-    contextTree = this->zeros; // initialize
+    contextTreeList[i] = this->zeros; // initialize
     // Matrix for attentional weight
     //showAlphaTree.push_back(MatD::Zero(data->tgt.size(), 
     //       state->encState.size()-1+state->encTreeNodeVec.size()));
     this->calculateAlpha(state, state->decState[i], alphaTree, i); // (!) Insert the i-th alphaTree
     //showAlphaTree.back().row(i) = alphaTree[i].transpose();
     for (int j = 1; j < (int)state->encState.size(); ++j) {
-      contextTree.noalias() += alphaTree.coeff(j-1, i)*state->encState[j]->h;
+      contextTreeList[i].noalias() += alphaTree.coeff(j-1, i)*state->encState[j]->h;
     }
     for (int j = 0; j < (int)state->encTreeNodeVec.size(); ++j) {
-      contextTree.noalias() += alphaTree.coeff(j+(int)state->encState.size()-1, i)*state->encTreeNodeVec[j]->state->h;
+      contextTreeList[i].noalias() += alphaTree.coeff(j+(int)state->encState.size()-1, i)*state->encTreeNodeVec[j]->state->h;
     }
-    s_tilde[i].noalias() += this->Wct*contextTree;
+    s_tilde[i].noalias() += this->Wct*contextTreeList[i];
     ActFunc::tanh(s_tilde[i]); // s~tanh(W_c[ht; c_Tree])
 
     if (!this->useBlackOut) {
@@ -818,7 +818,7 @@ void AttentionTreeEncDec::train(AttentionTreeEncDec::Data* data, AttentionTreeEn
     state->decState[i]->delh.noalias() += this->Wst.transpose()*del_stilde[i];
     grad.Wst.noalias() += del_stilde[i]*state->decState[i]->h.transpose();
     grad.bs += del_stilde[i];
-    grad.Wct.noalias() += del_stilde[i]*contextTree.transpose();
+    grad.Wct.noalias() += del_stilde[i]*contextTreeList[i].transpose();
     del_contextTree.noalias() = this->Wct.transpose()*del_stilde[i];
     // del_contextTree
     for (int j = 0; j < (int)data->src.size(); ++j) { // Seq
@@ -1069,7 +1069,7 @@ void AttentionTreeEncDec::trainOpenMP() { // OpenMP Multi-threading
       int id = omp_get_thread_num();
       Real loss;
       if(this->inputFeeding) {
-	this->train(this->trainData[i], args[id]->grad, loss, stateList[i], args[id]->blackOutState, args[id]->s_tilde, args[id]->del_stilde);
+	this->train(this->trainData[i], args[id]->grad, loss, stateList[i], args[id]->blackOutState, args[id]->s_tilde, args[id]->del_stilde, args[id]->contextTreeList);
       } else {
 	this->train(this->trainData[i], args[id]->grad, loss, stateList[i], args[id]->blackOutState);
       }

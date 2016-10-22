@@ -107,7 +107,8 @@ public:
 			const std::vector<int>& src, const std::vector<int>& tgt);
   void train(AttentionTreeEncDec::Data* data, AttentionTreeEncDec::Grad& grad, Real& los, 
 	     AttentionTreeEncDec::State* state, std::vector<BlackOut::State*>& blackOutState,
-	     std::vector<VecD>& s_tilde, std::vector<VecD>& del_stilde);
+	     std::vector<VecD>& s_tilde, std::vector<VecD>& del_stilde,
+	     std::vector<VecD>& contextTreeList);
   void sgd(const AttentionTreeEncDec::Grad& grad, const Real learningRate);
   void backpropThroughStructure(AttentionTreeEncDec::StateNode* parent, 
 				AttentionTreeEncDec::StateNode* left, AttentionTreeEncDec::StateNode* right, 
@@ -373,6 +374,7 @@ public:
       for (int i = 0; i< 100; ++i) {
 	this->s_tilde.push_back(VecD());
 	this->del_stilde.push_back(VecD());
+	this->contextTreeList.push_back(VecD());
       }
     }
   };
@@ -382,6 +384,7 @@ public:
   std::vector<AttentionTreeEncDec::State*> state;
   std::vector<BlackOut::State*> blackOutState;
   std::vector<VecD> s_tilde, del_stilde; // decoder and its gradient for input-feeding
+  std::vector<VecD> contextTreeList;
   AttentionTreeEncDec::Grad grad;
   Real loss;
 };

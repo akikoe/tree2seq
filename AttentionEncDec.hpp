@@ -73,7 +73,8 @@ public:
 	     AttentionEncDec::State* state, std::vector<BlackOut::State*>& blackOutState);
   void train(AttentionEncDec::Data* data, AttentionEncDec::Grad& grad, Real& los, 
 	     AttentionEncDec::State* state, std::vector<BlackOut::State*>& blackOutState,
-	     std::vector<VecD>& s_tilde, std::vector<VecD>& del_stilde);
+	     std::vector<VecD>& s_tilde, std::vector<VecD>& del_stilde,
+	     std::vector<VecD>& contextSeqList);
   void sgd(const AttentionEncDec::Grad& grad, const Real learningRate);
   void trainOpenMP();
   void calculateAlpha(const AttentionEncDec::State* state, 
@@ -261,6 +262,7 @@ public:
       for (int i = 0; i< 100; ++i) {
 	this->s_tilde.push_back(VecD());
 	this->del_stilde.push_back(VecD());
+	this->contextSeqList.push_back(VecD());
       }
     }
   };
@@ -270,6 +272,7 @@ public:
   std::vector<AttentionEncDec::State*> state;
   std::vector<BlackOut::State*> blackOutState;
   std::vector<VecD> s_tilde, del_stilde; // decoder and its gradient for input-feeding
+  std::vector<VecD> contextSeqList;
   AttentionEncDec::Grad grad;
   Real loss;
 };
