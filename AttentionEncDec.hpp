@@ -205,7 +205,7 @@ public:
       }
     }
   }
-
+  /*
   void operator /= (const Real val){
     this->lstmSrcGrad /= val;
     this->lstmTgtGrad /= val;
@@ -221,6 +221,7 @@ public:
       it->second /= val;
     }
   }
+  */
 };
 
 class AttentionEncDec::DecCandidate{
