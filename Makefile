@@ -26,6 +26,7 @@ CXXFLAGS+=-I$(EIGEN_LOCATION)
 CXXFLAGS+=-I$(BOOST_LOCATION)
 CXXFLAGS+=-I$(SHARE_LOCATION)
 CXXFLAGS+=-fopenmp
+#CXXFLAGS+=-DUSE_FLOAT # Speed up; Comment out when running gradient checking
 
 SRCS=$(shell ls *.cpp)
 OBJS=$(SRCS:.cpp=.o)
