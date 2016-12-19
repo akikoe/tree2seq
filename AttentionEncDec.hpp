@@ -256,11 +256,13 @@ public:
     this->grad.Wcs = MatD::Zero(this->attentionEncDec.Wcs.rows(), this->attentionEncDec.Wcs.cols());
     this->grad.Wgeneral = MatD::Zero(this->attentionEncDec.Wgeneral.rows(), this->attentionEncDec.Wgeneral.cols());
 
-    for (int i = 0; i< 100; ++i) {
+    int max = this->attentionEncDec.maxGeneNum; 
+
+    for (int i = 0; i < max; ++i) {
       this->blackOutState.push_back(new BlackOut::State);
     }
     if (this->attentionEncDec.inputFeeding) {
-      for (int i = 0; i< 100; ++i) {
+      for (int i = 0; i < max; ++i) {
 	this->s_tilde.push_back(VecD());
 	this->del_stilde.push_back(VecD());
 	this->contextSeqList.push_back(VecD());

@@ -368,11 +368,14 @@ public:
     this->grad.WcellTree = MatD::Zero(this->attentionTreeEncDec.WcellTree.rows(), this->attentionTreeEncDec.WcellTree.cols());
     this->grad.WhSeq = MatD::Zero(this->attentionTreeEncDec.WhSeq.rows(), this->attentionTreeEncDec.WhSeq.cols());
     this->grad.WhTree = MatD::Zero(this->attentionTreeEncDec.WhTree.rows(), this->attentionTreeEncDec.WhTree.cols());
-    for (int i = 0; i< 100; ++i) {
+
+    int max = this->attentionTreeEncDec.maxGeneNum; 
+
+    for (int i = 0; i < max; ++i) {
       this->blackOutState.push_back(new BlackOut::State);
     }
     if (this->attentionTreeEncDec.inputFeeding) {
-      for (int i = 0; i< 100; ++i) {
+      for (int i = 0; i < max; ++i) {
 	this->s_tilde.push_back(VecD());
 	this->del_stilde.push_back(VecD());
 	this->contextTreeList.push_back(VecD());
